@@ -3,31 +3,25 @@ var aCar = {
 	address : '3 Walkers Lane',
 	
 		wasOwnedBy : function(query){
-			var result = false;
-			this.previous_owners.forEach(function(previous) {
-				if (query.toUpperCase() == previous.name.toUpperCase() ) {
-	            result = true ;
-				}
-			})
-			return result ;
-			},
+			var match = this.previous_owners.find(function(element,index){
+			  return query.toUpperCase() == element.name.toUpperCase() ;
+           });
+        return match == undefined ? false : true ; 
+    },
 	
 	howOld : function() {
                var today = new Date();
                var this_year = today.getFullYear() ;
                return this_year - (this.registration.year + 2000) ;
            },
-           
-     hasFeature : function(query) {
-            var result = false;
-            this.features.forEach(function(feature) {
-                 if (query.toUpperCase() == feature.toUpperCase() ) {
-                 result = true ;
-                }
-            })
-            return result ;
-            },
-	
+     
+    hasFeature : function(query) {
+            var match = this.features.find(function(element,index) {
+            return query.toUpperCase() == element.toUpperCase() ;
+           });
+        return match == undefined ? false : true ; 
+    },
+
 	 addPreviousOwner : function( newName, newAddress) {
            var o = { name : newName, address : newAddress } ;
            if (this.previous_owners.length== 3){
