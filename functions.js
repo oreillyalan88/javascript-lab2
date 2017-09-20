@@ -1,6 +1,19 @@
 var aCar = {
 	owner : 'Joe Bloggs',
 	address : '3 Walkers Lane',
+	  addPreviousOwner : function( newName, newAddress) {
+           var o = { name : newName, address : newAddress } ;
+           if (this.previous_owners.length== 3){
+           this.previous_owners.shift(0) ;
+           }
+           this.previous_owners.push(o) ;
+     } ,
+     
+     newOwner : function(newName, newAddress){
+     	this.addPreviousOwner(this.owner,this.address);
+     	this.owner=newName;
+     	this.address=newAddress;
+     },
     previous_owners : [ { name : 'Pat Smith', address : '1 Main Street'}, 
                         { name : 'Sheila Dwyer', address : '2 High Street'}],
 	type : {
@@ -18,19 +31,17 @@ aCar.color = { exterior : 'red',
                             shade : 'cream' }
               } ;
 
- var addPreviousOwner = function(car, newName, newAddress) {
-           var o = { name : newName, address : newAddress } ;
-           car.previous_owners.push(o) ;
-           
-           if (car.previous_owners.length-1 >= 3){
-           car.previous_owners.shift(0) ;}
-     } ;
 
 
-addPreviousOwner(aCar,'Jim Nugent','3 Lower Road') ;
-addPreviousOwner(aCar,'Rachel Fleming','4 Upper Road') ;
+
+aCar.addPreviousOwner('Jim Nugent','3 Lower Road') ;
+aCar.addPreviousOwner('Rachel Fleming','4 Upper Road') ;
+aCar.newOwner('Donal Dunne','5 Kings Way') ;
+console.log(aCar.previous_owners[2].name) ;
+console.log(aCar.owner) ;
+
+     //console.log(aCar.previous_owners[2].name) ;
+     //console.log(aCar.previous_owners[0].name) ;
 
 
-     console.log(aCar.previous_owners[2].name) ;
-     console.log(aCar.previous_owners[0].name) ;
 	// console.log(aCar);
