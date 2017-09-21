@@ -3,6 +3,11 @@ function Car(name,address,make,model,cc,reg) {
         this.address = address
         this.previous_owners = [ ]
         this.type = { make : make, model : model, cc : cc }
+        var regParts = reg.split('-') ;
+        this.registration = {
+                     year : parseInt(regParts[0]), 
+                     county : regParts[1], 
+                     number : regParts[2] };
         this.features = ['Parking assist', 'Alarm', 'Tow-bar'];
 
         this.addPreviousOwner = function(newName,newAddress) {
@@ -13,7 +18,12 @@ function Car(name,address,make,model,cc,reg) {
                this.previous_owners.push(o)
          };
          
-              
+         this.howOld = function() {
+            var today = new Date();
+            var this_year = today.getFullYear();
+            return this_year - (this.registration.year + 2000);
+        };
+        
          this.newOwner = function(newName, newAddress){
          	this.addPreviousOwner(this.owner,this.address);
          	this.owner=newName;
@@ -42,3 +52,4 @@ function Car(name,address,make,model,cc,reg) {
     car1.newOwner('Donal Dunne','5 Kings Way') ;
     console.log(car1.previous_owners[2].name) ;
     console.log(car1.owner) 
+    console.log('Car age: ' + car1.howOld()) ;
