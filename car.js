@@ -1,12 +1,13 @@
 
 class Car { 
-	constructor(name_in,address_in,make_in,model_in,cc_in,reg_in) {
+	constructor(name_in,address_in,make_in,model_in,cc_in,p_assist_in,alarn_in,towbar_in,reg_in) {
 		this.owner = name_in ;
 		this.address = address_in;
 		this.previous_owners = [ ];
 		this.type = { make : make_in, model : model_in, cc : cc_in };
 	    let reg_parts = reg_in.split('-');
 	    let year = parseInt(reg_parts[0]);
+	    this.features = [p_assist_in, alarn_in, towbar_in];
 	    this.registration = {year : year , county : reg_parts[1], number : reg_parts[2] } ;
     }
 	howOld() {
@@ -26,6 +27,14 @@ class Car {
 	       }
 	       this.previous_owners.push(o);
 	    }
+	    
+    hasFeature(feature_in) {
+            var match = this.features.find(function(element,index) {
+            return feature_in.toUpperCase() == element.toUpperCase() ;
+           });
+        return match == undefined ? false : true ; 
+    }
+   
 	wasOwnedBy(name_in) {
         let result = false;
 		let match = this.previous_owners.find(
