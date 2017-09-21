@@ -53,3 +53,9 @@ function Car(name,address,make,model,cc,reg) {
     console.log(car1.previous_owners[2].name) ;
     console.log(car1.owner) 
     console.log('Car age: ' + car1.howOld()) ;
+    
+    console.log('Alarm:' + car1.hasFeature('alarm') );
+    car1.newOwner('Donal Dunne','5 Kings Way') ;
+    console.log(car1.previous_owners[2].name) ;
+    console.log(car1.owner) ;
+    console.log('Car age: ' + car1.howOld()) ;
