@@ -12,6 +12,13 @@ function Car(name,address,make,model,cc,reg) {
                }
                this.previous_owners.push(o)
          };
+         
+              
+         this.newOwner = function(newName, newAddress){
+         	this.addPreviousOwner(this.owner,this.address);
+         	this.owner=newName;
+         	this.address=newAddress;
+         },
 
          this.wasOwnedBy = function(query) {
             var match = this.previous_owners.find(function(element,index) {
@@ -31,3 +38,7 @@ function Car(name,address,make,model,cc,reg) {
     car1.addPreviousOwner( 'Sheila Dwyer', 
                            '2 High Street') ;
     console.log('Path Smith ? ' + car1.wasOwnedBy('Pat Smith')) ;
+    
+    car1.newOwner('Donal Dunne','5 Kings Way') ;
+    console.log(car1.previous_owners[2].name) ;
+    console.log(car1.owner) 
